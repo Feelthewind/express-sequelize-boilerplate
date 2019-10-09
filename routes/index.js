@@ -7,7 +7,10 @@ router.get("/", async (req, res) => {
   const users = await models.User.findAll({
     include: [models.Task]
   });
-  console.dir(users);
+  res.render("index", {
+    title: "Sequelize: Express Example",
+    users
+  });
 });
 
 export default router;
