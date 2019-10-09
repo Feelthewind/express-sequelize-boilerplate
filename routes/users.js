@@ -10,10 +10,28 @@ router.post("/create", async (req, res) => {
   res.redirect("/");
 });
 
+router.get("/:user_id/destroy", async (req, res) => {
+  await models.User.destroy({
+    where: {
+      id: req.params.user_id
+    }
+  });
+  res.redirect("/");
+});
+
 router.post("/:user_id/tasks/create", async (req, res) => {
   const task = await models.Task.create({
     title: req.body.title,
     UserId: req.params.user_id
+  });
+  res.redirect("/");
+});
+
+router.get("/:user_id/tasks/:task_id/destroy", async (req, res) => {
+  await models.Task.destroy({
+    where: {
+      id: req.params.task_id
+    }
   });
   res.redirect("/");
 });
